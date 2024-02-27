@@ -2,28 +2,32 @@
   {
     "jk": [
       {
-        "disciplina": "Prog. Orin. a Objetos (10)",
-        "responsavel": "Bernardo Copstein",
-        "recurso": "Laboratório - 309"
+        "discipline": "Prog. Orin. a Objetos (10)",
+        "responsible": "Bernardo Copstein",
+        "resource": "Laboratório - 309",
+        "date": "25 FEV 2024"
       },
       {
-        "disciplina": "Fundam. de Progr. (13)",
-        "responsavel": "Marcos Mangam",
-        "recurso": "Notebook1"
+        "discipline": "Fundam. de Progr. (13)",
+        "responsible": "Marcos Mangam",
+        "resource": "Notebook1",
+        "date": "25 FEV 2024"
       }
     ]
   },
   {
     "lm": [
       {
-        "disciplina": "Banco de Dados II",
-        "responsavel": "Eduardo Arruda",
-        "recurso": "Laboratório - 309"
+        "discipline": "Banco de Dados II",
+        "responsible": "Eduardo Arruda",
+        "resource": "Laboratório - 309",
+        "date": "25 FEV 2024"
       },
       {
-        "disciplina": "Fundam. de Progr. (13)",
-        "responsavel": "Marcos Mangam",
-        "recurso": "Notebook1"
+        "discipline": "Fundam. de Progr. (13)",
+        "responsible": "Marcos Mangam",
+        "resource": "Notebook1",
+        "date": "25 FEV 2024"
       }
     ]
   }

@@ -10,7 +10,7 @@ export default function App() {
           <CardAllocation
             responsible="Fulano de Tal"
             discipline="Matemática"
-            local="Sala 01"
+            resource="Sala 01"
             type="laboratory"
           />
         }

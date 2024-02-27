@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const CardAllocation = ({ responsible, discipline, local, type }) => {
+const CardAllocation = ({ responsible, discipline, resource, type }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
 
@@ -70,7 +70,7 @@ const CardAllocation = ({ responsible, discipline, local, type }) => {
           </View>
         </View>
         <Text style={styles.titleText}>{discipline}</Text>
-        <Text style={styles.locationText}>{local}</Text>
+        <Text style={styles.resourceText}>{resource}</Text>
       </View>
     </View>
   );
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  locationText: {
+  resourceText: {
     fontSize: 12,
     fontWeight: "light",
     color: "#6B7280",
