@@ -2,26 +2,26 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const CardAlocacao = ({ responsavel, disciplina, local, tipo }) => {
-  const [isFavorito, setIsFavorito] = useState(false);
-  const [isNotificacao, setIsNotificacao] = useState(false);
+const CardAllocation = ({ responsible, discipline, local, type }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isNotification, setIsNotification] = useState(false);
 
-  const handleFavorito = () => {
-    setIsFavorito(!isFavorito);
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
   };
 
-  const handleNotificacao = () => {
-    setIsNotificacao(!isNotificacao);
+  const handleNotification = () => {
+    setIsNotification(!isNotification);
   };
 
-  const handleOpcoes = () => {};
+  const handleOptionsClick = () => {};
 
   return (
     <View style={styles.container}>
       <View>
-        {tipo === "laboratorio" ? (
+        {type === "laboratory" ? (
           <Ionicons name="laptop-outline" size={25} color="#6B7280" />
-        ) : tipo === "auditorio" ? (
+        ) : tipo === "auditorium" ? (
           <Ionicons name="easel-outline" size={25} color="#6B7280" />
         ) : (
           <Ionicons name="school-outline" size={25} color="#6B7280" />
@@ -29,47 +29,47 @@ const CardAlocacao = ({ responsavel, disciplina, local, tipo }) => {
       </View>
       <View style={styles.content}>
         <View style={styles.contentHeader}>
-          <Text style={styles.responsibleText}>{responsavel}</Text>
+          <Text style={styles.responsibleText}>{responsible}</Text>
           <View style={styles.iconsContainer}>
-            {isFavorito ? (
+            {isFavorite ? (
               <Ionicons
                 name="star"
                 size={16}
                 color="#F4E328"
-                onPress={handleFavorito}
+                onPress={handleFavorite}
               />
             ) : (
               <Ionicons
                 name="star-outline"
                 size={16}
                 color="#6B7280"
-                onPress={handleFavorito}
+                onPress={handleFavorite}
               />
             )}
-            {isNotificacao ? (
+            {isNotification ? (
               <Ionicons
                 name="notifications"
                 size={16}
                 color="#FA521D"
-                onPress={handleNotificacao}
+                onPress={handleNotification}
               />
             ) : (
               <Ionicons
                 name="notifications-outline"
                 size={16}
                 color="#6B7280"
-                onPress={handleNotificacao}
+                onPress={handleNotification}
               />
             )}
             <Ionicons
               name="ellipsis-vertical-outline"
               size={16}
               color="#6B7280"
-              onPress={handleOpcoes}
+              onPress={handleOptionsClick}
             />
           </View>
         </View>
-        <Text style={styles.titleText}>{disciplina}</Text>
+        <Text style={styles.titleText}>{discipline}</Text>
         <Text style={styles.locationText}>{local}</Text>
       </View>
     </View>
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
     gap: 10,
   },
 });
-export default CardAlocacao;
+export default CardAllocation;

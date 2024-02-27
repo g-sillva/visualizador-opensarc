@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
-import CardAlocacao from "./src/components/CardAlocacao";
+import { StyleSheet, View } from "react-native";
 import Accordion from "./src/components/Accordion";
+import CardAllocation from "./src/components/CardAllocation";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Accordion
         children={
-          <CardAlocacao
-            responsavel="Fulano de Tal"
-            disciplina="Matemática"
+          <CardAllocation
+            responsible="Fulano de Tal"
+            discipline="Matemática"
             local="Sala 01"
-            tipo="sala"
+            type="laboratory"
           />
         }
       />
