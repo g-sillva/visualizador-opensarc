@@ -1,14 +1,30 @@
 [
   {
-    "disciplina": "Prog. Orin. a Objetos (10)",
-    "responsavel": "Bernardo Copstein",
-    "recurso": "Laboratório - 309",
-    "horario": "09:00"
+    "jk": [
+      {
+        "disciplina": "Prog. Orin. a Objetos (10)",
+        "responsavel": "Bernardo Copstein",
+        "recurso": "Laboratório - 309"
+      },
+      {
+        "disciplina": "Fundam. de Progr. (13)",
+        "responsavel": "Marcos Mangam",
+        "recurso": "Notebook1"
+      }
+    ]
   },
   {
-    "disciplina": "Fundam. de Progr. (13)",
-    "responsavel": "Marcos Mangam",
-    "recurso": "Notebook1",
-    "horario": "09:00"
+    "lm": [
+      {
+        "disciplina": "Banco de Dados II",
+        "responsavel": "Eduardo Arruda",
+        "recurso": "Laboratório - 309"
+      },
+      {
+        "disciplina": "Fundam. de Progr. (13)",
+        "responsavel": "Marcos Mangam",
+        "recurso": "Notebook1"
+      }
+    ]
   }
 ]

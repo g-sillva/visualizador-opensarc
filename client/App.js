@@ -1,15 +1,19 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import CardAlocacao from "./src/components/CardAlocacao";
+import Accordion from "./src/components/Accordion";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <CardAlocacao
-        responsavel="Azriel Majdenbaum"
-        disciplina="Engenharia de Requisitos"
-        local="17:30 - Laboratórios 309/312"
-        tipo="laboratorio"
+      <Accordion
+        children={
+          <CardAlocacao
+            responsavel="Fulano de Tal"
+            disciplina="Matemática"
+            local="Sala 01"
+            tipo="sala"
+          />
+        }
       />
     </View>
   );
