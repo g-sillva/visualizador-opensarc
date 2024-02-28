@@ -17,16 +17,18 @@ class ResourceSpider(scrapy.Spider):
         aggregated_data = {}
 
         for content in containers:
-            time = content.css("table tr td:nth-child(1) span::text").get()
+            timeCode = content.css("table tr td:nth-child(1) span::text").get()
+            time = self.formatTime(timeCode)
             resourceTable = content.css("table tr td:nth-child(2)")
             lines = resourceTable.css("tr")[1:]
 
             for line in lines:
                 item = {
                     "time": time,
-                    "resource": line.css('td:nth-child(1) span::text').get(),
-                    "discipline": line.css('td:nth-child(2) span::text').get(),
-                    "responsible": line.css('td:nth-child(3) span::text').get(),
+                    "timeCode": timeCode,
+                    "resource": line.css('td:nth-child(1) span::text').get().strip(),
+                    "discipline": line.css('td:nth-child(2) span::text').get().strip(),
+                    "responsible": line.css('td:nth-child(3) span::text').get().strip(),
                 }
 
                 if time in aggregated_data:
@@ -36,3 +38,24 @@ class ResourceSpider(scrapy.Spider):
 
         yield aggregated_data
 
+    def formatTime(self, time):
+        time_map = {
+            'a': '08:00',
+            'b': '08:45',
+            'c': '09:45',
+            'd': '10:30',
+            'e': '11:30',
+            'e1': '12:15',
+            'f': '14:00',
+            'g': '14:45',
+            'h': '15:45',
+            'i': '16:30',
+            'j': '17:30',
+            'k': '18:15',
+            'l': '19:15',
+            'm': '20:00',
+            'n': '21:00',
+            'p': '21:45'
+        }
+
+        return time_map[time[0].lower()]
