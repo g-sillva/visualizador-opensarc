@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, Text, ScrollView, View } from "react-native";
 import CardAllocation from "../components/CardAllocation";
 import Accordion from "../components/Accordion";
+import { getMonthName } from "../utils/utils";
+import NotificationButton from "../components/NotificationButton";
 
 export default HomeScreen = () => {
   const [resources, setResources] = useState([]);
@@ -13,28 +15,10 @@ export default HomeScreen = () => {
     date.getMonth()
   )} ${date.getFullYear()}`;
 
-  function getMonthName(month) {
-    const monthNames = [
-      "JAN",
-      "FEV",
-      "MAR",
-      "ABR",
-      "MAI",
-      "JUN",
-      "JUL",
-      "AGO",
-      "SET",
-      "OUT",
-      "NOV",
-      "DEZ",
-    ];
-    return monthNames[month];
-  }
-
   const fetchResources = async () => {
     setIsLoading(true);
 
-    axios
+    await axios
       .get(
         process.env.EXPO_PUBLIC_SERVER_API_URL +
           "/crawl.json?spider_name=resource_spider&url=https://sarc.pucrs.br/Default/"
@@ -54,27 +38,32 @@ export default HomeScreen = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.titleText}>Recursos Alocados</Text>
-      {isLoading ? (
-        <Text>Carregando...</Text>
-      ) : (
-        Object.keys(resources).map((time, i) => (
-          <Accordion key={i} time={time} date={formattedDate}>
-            {resources[time].map((resource, j) => (
-              <CardAllocation
-                key={j}
-                responsible={resource.responsible}
-                discipline={resource.discipline}
-                resource={resource.resource}
-                time={resource.time}
-                type={resource.type}
-              />
-            ))}
-          </Accordion>
-        ))
-      )}
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView>
+        <Text style={styles.titleText}>Recursos Alocados</Text>
+        {isLoading ? (
+          <Text>Carregando...</Text>
+        ) : (
+          Object.keys(resources).map((time, i) => (
+            <Accordion key={i} time={time} date={formattedDate}>
+              {resources[time].map((resource, j) => (
+                <CardAllocation
+                  key={j}
+                  responsible={resource.responsible}
+                  discipline={resource.discipline}
+                  resource={resource.resource}
+                  time={resource.time}
+                  type={resource.type}
+                />
+              ))}
+            </Accordion>
+          ))
+        )}
+      </ScrollView>
+      <View style={styles.notificationButton}>
+        <NotificationButton />
+      </View>
+    </View>
   );
 };
 
@@ -88,5 +77,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#111827",
     margin: 10,
+  },
+  notificationButton: {
+    position: "absolute",
+    bottom: 30,
+    right: 30,
   },
 });
