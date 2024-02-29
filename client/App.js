@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
-import Accordion from "./src/components/Accordion";
-import CardAllocation from "./src/components/CardAllocation";
+import HomeScreen from "./src/screens/HomeScreen";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Accordion
+      <HomeScreen />
+      {/* <Accordion
         children={
           <CardAllocation
             responsible="Fulano de Tal"
@@ -14,7 +14,7 @@ export default function App() {
             type="laboratory"
           />
         }
-      />
+      /> */}
     </View>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const CardAllocation = ({ responsible, discipline, resource, type }) => {
+const CardAllocation = ({ responsible, discipline, resource, time, type }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
 
@@ -70,7 +70,9 @@ const CardAllocation = ({ responsible, discipline, resource, type }) => {
           </View>
         </View>
         <Text style={styles.titleText}>{discipline}</Text>
-        <Text style={styles.resourceText}>{resource}</Text>
+        <Text style={styles.resourceText}>
+          {time} - {resource}
+        </Text>
       </View>
     </View>
   );

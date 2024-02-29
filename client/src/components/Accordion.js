@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const Accordion = ({ hour, date, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Accordion = ({ time, date, children }) => {
+  const [isOpen, setIsOpen] = useState(true);
   const rotateZ = isOpen ? "180deg" : "0deg";
 
   const onPress = () => {
@@ -14,7 +14,7 @@ const Accordion = ({ hour, date, children }) => {
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress} style={styles.triggerContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.hourText}>{hour || "00:00"}</Text>
+          <Text style={styles.timeText}>{time || "00:00"}</Text>
           <Text style={styles.dateText}>{date}</Text>
         </View>
         <Ionicons
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
-  hourText: {
+  timeText: {
     fontSize: 18,
     color: "#111827",
     fontWeight: "bold",
