@@ -1,21 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import HomeScreen from "./src/screens/HomeScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HomeScreen />
-      {/* <Accordion
-        children={
-          <CardAllocation
-            responsible="Fulano de Tal"
-            discipline="Matemática"
-            resource="Sala 01"
-            type="laboratory"
-          />
-        }
-      /> */}
-    </View>
+    </SafeAreaView>
   );
 }
 

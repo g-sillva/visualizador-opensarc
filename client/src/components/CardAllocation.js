@@ -21,7 +21,7 @@ const CardAllocation = ({ responsible, discipline, resource, time, type }) => {
       <View>
         {type === "laboratory" ? (
           <Ionicons name="laptop-outline" size={25} color="#6B7280" />
-        ) : tipo === "auditorium" ? (
+        ) : type === "auditorium" ? (
           <Ionicons name="easel-outline" size={25} color="#6B7280" />
         ) : (
           <Ionicons name="school-outline" size={25} color="#6B7280" />
