@@ -1,17 +1,7 @@
 import scrapy
 
-from core import config
-
 class ResourceSpider(scrapy.Spider):
-    name="resourceSpider"
-
-    def start_requests(self):
-        start_urls = [config.RESOURCES_SITE_ENTRYPOINT]
-        for url in start_urls:
-            yield scrapy.Request(
-                url=url,
-                callback=self.parse
-            )
+    name="resource_spider"
 
     def parse(self, response):
         containers = response.css("#MSO_ContentTable div div:nth-child(3) > div > table")
