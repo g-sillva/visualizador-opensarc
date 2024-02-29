@@ -10,17 +10,18 @@ class ResourceSpider(scrapy.Spider):
 
         for content in containers:
             timeCode = content.css("table tr td:nth-child(1) span::text").get()
-            time = self.formatTime(timeCode)
+            time = self.format_time(timeCode)
             resourceTable = content.css("table tr td:nth-child(2)")
             lines = resourceTable.css("tr")[1:]
 
             for line in lines:
                 item = {
-                    "time": time,
-                    "timeCode": timeCode,
-                    "resource": line.css('td:nth-child(1) span::text').get().strip(),
-                    "discipline": line.css('td:nth-child(2) span::text').get().strip(),
-                    "responsible": line.css('td:nth-child(3) span::text').get().strip(),
+                    'time': time,
+                    'timeCode': timeCode,
+                    'resource': line.css('td:nth-child(1) span::text').get().strip(),
+                    'discipline': line.css('td:nth-child(2) span::text').get().strip(),
+                    'responsible': line.css('td:nth-child(3) span::text').get().strip(),
+                    'type': self.format_type(line.css('td:nth-child(1) span::text').get().strip()),
                 }
 
                 if time in aggregated_data:
@@ -30,7 +31,17 @@ class ResourceSpider(scrapy.Spider):
 
         yield aggregated_data
 
-    def formatTime(self, time):
+    def format_type(self, type):
+        lab_types = ['lab', 'lad']
+        if any(x in type.lower() for x in lab_types):
+            return 'laboratory'
+        elif 'audit' in type.lower():
+            return 'auditorium'
+        else:
+            return 'classroom'
+
+
+    def format_time(self, time):
         time_map = {
             'a': '08:00',
             'b': '08:45',
