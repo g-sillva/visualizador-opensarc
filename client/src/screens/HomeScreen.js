@@ -6,14 +6,13 @@ import Accordion from "../components/Accordion";
 import { getMonthName } from "../utils/utils";
 import NotificationButton from "../components/NotificationButton";
 
-export default HomeScreen = () => {
+export default HomeScreen = ({ onNotificationPress }) => {
   const [resources, setResources] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const date = new Date();
-  const formattedDate = `${date.getDate()} ${getMonthName(
-    date.getMonth()
-  )} ${date.getFullYear()}`;
+  const monthName = getMonthName(date.getMonth());
+  const formattedDate = `${date.getDate()} ${monthName} ${date.getFullYear()}`;
 
   const fetchResources = async () => {
     setIsLoading(true);
@@ -61,7 +60,7 @@ export default HomeScreen = () => {
         )}
       </ScrollView>
       <View style={styles.notificationButton}>
-        <NotificationButton />
+        <NotificationButton onPress={onNotificationPress} />
       </View>
     </View>
   );

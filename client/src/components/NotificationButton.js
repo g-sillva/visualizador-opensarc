@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default NotificationButton = () => {
+export default NotificationButton = ({ onPress }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Ionicons name="notifications" size={25} color="#ffffff" />
       <View style={styles.addIcon}>
         <Ionicons name="add" size={18} color="#ffffff" />

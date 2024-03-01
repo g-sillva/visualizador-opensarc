@@ -42,6 +42,9 @@ class ResourceSpider(scrapy.Spider):
 
 
     def format_time(self, time):
+        if time == None:
+            return None
+        
         time_map = {
             'a': '08:00',
             'b': '08:45',
