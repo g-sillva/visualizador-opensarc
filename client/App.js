@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef } from "react";
-import { StyleSheet, SafeAreaView, Text } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import HomeScreen from "./src/screens/HomeScreen";
 import {
   BottomSheetModal,
@@ -7,6 +7,7 @@ import {
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import FilterForm from "./src/components/FilterForm";
 
 export default function App() {
   const bottomSheetModalRef = useRef(null);
@@ -33,7 +34,7 @@ export default function App() {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <Text>Awesome 🎉</Text>
+              <FilterForm />
             </BottomSheetView>
           </BottomSheetModal>
         </BottomSheetModalProvider>
