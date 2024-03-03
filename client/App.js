@@ -7,12 +7,12 @@ import {
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import FilterForm from "./src/components/FilterForm";
+import AddNotificationForm from "./src/components/AddNotificationForm";
 
 export default function App() {
   const bottomSheetModalRef = useRef(null);
 
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ["50%", "80%"], []);
 
   const handleNotificationButtonPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <GestureHandlerRootView>
+      <GestureHandlerRootView style={styles.bottomSheetContainer}>
         <BottomSheetModalProvider>
           <HomeScreen onNotificationPress={handleNotificationButtonPress} />
           <BottomSheetModal
@@ -34,7 +34,7 @@ export default function App() {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <FilterForm />
+              <AddNotificationForm />
             </BottomSheetView>
           </BottomSheetModal>
         </BottomSheetModalProvider>
@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
+  },
+  bottomSheetContainer: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: -1,
+    },
+    shadowOpacity: 0.05,
   },
   contentContainer: {
     flex: 1,
