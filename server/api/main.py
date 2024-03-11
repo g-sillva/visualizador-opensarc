@@ -1,27 +1,26 @@
-import os
 import atexit
 import requests
-from dotenv import load_dotenv
-from cache import add_to_cache, get_from_cache
+import os
+from fastapi import FastAPI
+from api.cache import add_to_cache, get_from_cache
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask
-from flask_restful import Resource, Api
-from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
-load_dotenv()
-app = Flask(__name__)
-api = Api(app)
+app = FastAPI() # Create a FastAPI instance
+load_dotenv() # Load environment variables
 
-class Resources(Resource):
-    def get(self):
-        cached_resource = get_from_cache('resources')
+@app.get("/")
+def health_check():
+    return {"status": "ok"}
 
-        if cached_resource is None:
-            fetch_resources()
+@app.get("/resources")
+def get_resources():
+    cached_resource = get_from_cache('resources')
 
-        return get_from_cache('resources')
+    if cached_resource is None:
+        fetch_resources()
 
-api.add_resource(Resources, '/resources')
+    return get_from_cache('resources')
 
 def fetch_resources():
     print('Fetching resources...')
@@ -32,9 +31,6 @@ def fetch_resources():
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=fetch_resources, trigger="interval", minutes=5)
 scheduler.start()
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 # Shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())

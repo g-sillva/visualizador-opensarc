@@ -1,0 +1,5 @@
+2024-03-11 01:28:53 [scrapy] DEBUG: Crawled (404) <GET https://sarc.pucrs.br/robots.txt> (referer: None)
+2024-03-11 01:29:08 [scrapy] DEBUG: Redirecting (302) to <GET http://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx> from <GET https://sarc.pucrs.br/Default/>
+2024-03-11 01:29:08 [scrapy] DEBUG: Redirecting (301) to <GET https://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx> from <GET http://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx>
+2024-03-11 01:29:08 [scrapy] DEBUG: Redirecting (301) to <GET https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx> from <GET https://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx>
+2024-03-11 01:29:23 [scrapy] DEBUG: Retrying <GET https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx> (failed 1 times): 500 Internal Server Error

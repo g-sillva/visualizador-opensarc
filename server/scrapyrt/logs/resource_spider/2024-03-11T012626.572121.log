@@ -1,0 +1,38 @@
+2024-03-11 01:26:29 [scrapy] DEBUG: Crawled (404) <GET https://sarc.pucrs.br/robots.txt> (referer: None)
+2024-03-11 01:26:44 [scrapy] DEBUG: Redirecting (302) to <GET http://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx> from <GET https://sarc.pucrs.br/Default/>
+2024-03-11 01:26:44 [scrapy] DEBUG: Redirecting (301) to <GET https://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx> from <GET http://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx>
+2024-03-11 01:26:44 [scrapy] DEBUG: Redirecting (301) to <GET https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx> from <GET https://sarc.pucrs.br/Default?aspxerrorpath=/Default/default.aspx>
+2024-03-11 01:27:00 [scrapy] DEBUG: Retrying <GET https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx> (failed 1 times): 500 Internal Server Error
+2024-03-11 01:27:15 [scrapy] DEBUG: Retrying <GET https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx> (failed 2 times): 500 Internal Server Error
+2024-03-11 01:27:30 [scrapy] DEBUG: Gave up retrying <GET https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx> (failed 3 times): 500 Internal Server Error
+2024-03-11 01:27:30 [scrapy] DEBUG: Crawled (500) <GET https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx> (referer: None)
+2024-03-11 01:27:30 [scrapy] INFO: Ignoring response <500 https://sarc.pucrs.br/Default/?aspxerrorpath=/Default/default.aspx>: HTTP status code is not handled or not allowed
+2024-03-11 01:27:30 [scrapy] INFO: Closing spider (finished)
+2024-03-11 01:27:30 [scrapy] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 2555,
+ 'downloader/request_count': 7,
+ 'downloader/request_method_count/GET': 7,
+ 'downloader/response_bytes': 10881,
+ 'downloader/response_count': 7,
+ 'downloader/response_status_count/301': 2,
+ 'downloader/response_status_count/302': 1,
+ 'downloader/response_status_count/404': 1,
+ 'downloader/response_status_count/500': 3,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2024, 3, 11, 1, 27, 30, 472981),
+ 'httperror/response_ignored_count': 1,
+ 'httperror/response_ignored_status_count/500': 1,
+ 'log_count/DEBUG': 8,
+ 'log_count/INFO': 7,
+ 'memusage/max': 56639488,
+ 'memusage/startup': 54927360,
+ 'response_received_count': 2,
+ 'retry/count': 2,
+ 'retry/max_reached': 1,
+ 'retry/reason_count/500 Internal Server Error': 2,
+ 'scheduler/dequeued': 6,
+ 'scheduler/dequeued/memory': 6,
+ 'scheduler/enqueued': 6,
+ 'scheduler/enqueued/memory': 6,
+ 'start_time': datetime.datetime(2024, 3, 11, 1, 26, 28, 188309)}
+2024-03-11 01:27:30 [scrapy] INFO: Spider closed (finished)
