@@ -23,7 +23,6 @@ def get_resources():
     return get_from_cache('resources')
 
 def fetch_resources():
-    print('Fetching resources...')
     r = requests.get(os.getenv('SCRAPY_SERVER_URL')).json()
     items = r['items']
     add_to_cache('resources', items)

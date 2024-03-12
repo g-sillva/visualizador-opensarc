@@ -6,7 +6,10 @@ COPY . /app
 
 RUN apk update && apk add python3-dev \
     gcc \
-    libc-dev
+    libc-dev \
+    libffi-dev
+
+ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN pip install --no-cache-dir -r requirements.txt
 

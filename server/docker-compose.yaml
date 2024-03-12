@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   api:
@@ -17,11 +17,11 @@ services:
     image: redis:7-alpine
     restart: always
     ports:
-      - '6379:6379'
+      - "6379:6379"
   scrapyrt:
     image: scrapinghub/scrapyrt
     restart: always
     ports:
-      - '9080:9080'
+      - "9080:9080"
     volumes:
       - ./scrapyrt:/scrapyrt/project
