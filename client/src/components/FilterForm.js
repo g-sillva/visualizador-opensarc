@@ -1,104 +1,111 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { ScrollView } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default FilterForm = () => {
-  const [filter, setFilter] = useState({
-    resource: "",
-    responsible: "",
-    discipline: "",
-    time: "",
-    type: "",
-  });
-
-  const handleFilterChange = (field, value) => {
-    setFilter({ ...filter, [field]: value });
-    console.log(filter);
-  };
-
-  const filters = [
-    {
-      label: "Recurso",
-      value: filter.resource,
-      onChange: (value) => handleFilterChange("resource", value),
-    },
-    {
-      label: "Responsável",
-      value: filter.responsible,
-      onChange: (value) => handleFilterChange("responsible", value),
-    },
-    {
-      label: "Disciplina",
-      value: filter.discipline,
-      onChange: (value) => handleFilterChange("discipline", value),
-    },
-    {
-      label: "Hora",
-      value: filter.time,
-      onChange: (value) => handleFilterChange("time", value),
-    },
-    {
-      label: "Tipo",
-      value: filter.type,
-      onChange: (value) => handleFilterChange("type", value),
-    },
-  ];
-
   return (
-    <ScrollView style={{ width: "100%" }}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text>Filtrar</Text>
-          <Ionicons name="filter" size={20} color="#373737" />
-        </View>
-        <View style={styles.contentContainer}>
-          {filters.map((filter, i) => (
-            <View style={styles.filterField} key={i}>
-              <Text style={styles.filterLabel}>{filter.label}</Text>
-              <TextInput
-                placeholder={filter.label}
-                style={styles.filterInput}
-                value={filter.value}
-                onChangeText={filter.onChange}
-              />
-            </View>
-          ))}
-        </View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Filtrar</Text>
       </View>
-    </ScrollView>
+      <View style={styles.form}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Responsável</Text>
+          <View style={styles.inputField}>
+            <Ionicons name="person" size={20} color="#6B7280" />
+            <TextInput
+              placeholder="Nome do professor..."
+              style={styles.inputText}
+            />
+          </View>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Dia</Text>
+          <View style={styles.inputField}>
+            <Ionicons name="calendar" size={20} color="#6B7280" />
+            <TextInput
+              placeholder="Dia da semana..."
+              style={styles.inputText}
+            />
+          </View>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Disciplina</Text>
+          <View style={styles.inputField}>
+            <Ionicons name="school" size={20} color="#6B7280" />
+            <TextInput placeholder="Disciplina..." style={styles.inputText} />
+          </View>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Horário</Text>
+          <View style={styles.inputField}>
+            <Ionicons name="time" size={20} color="#6B7280" />
+            <TextInput placeholder="Ex.: JK" style={styles.inputText} />
+          </View>
+        </View>
+        <TouchableOpacity style={styles.addButton}>
+          <Text style={styles.addButtonText}>FILTRAR</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    padding: 20,
     width: "100%",
-    padding: 16,
-    // backgroundColor: "red",
-    justifyContent: "center",
+    flex: 1,
   },
   header: {
     display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "row",
+    gap: 10,
   },
-  contentContainer: {
-    marginTop: 22,
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#111827",
+  },
+  form: {
+    marginTop: 20,
     display: "flex",
-    gap: 20,
+    gap: 30,
   },
-  filterField: {
+  inputContainer: {
     display: "flex",
     gap: 10,
   },
-  filterLabel: {
+  inputLabel: {
+    fontSize: 14,
+    color: "#6B7280",
+  },
+  inputField: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: "#D1D5DB",
+    borderRadius: 5,
+  },
+  inputText: {
     fontSize: 16,
     fontWeight: "bold",
   },
-  filterInput: {
-    width: "100%",
-    padding: 16,
-    borderRadius: 5,
-    backgroundColor: "#f5f5f5",
+  addButton: {
+    backgroundColor: "#FA521D",
+    padding: 10,
+    borderRadius: 50,
+    width: "50%",
+    alignSelf: "center",
+  },
+  addButtonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });

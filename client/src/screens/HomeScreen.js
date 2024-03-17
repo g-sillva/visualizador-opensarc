@@ -4,10 +4,11 @@ import { StyleSheet, Text, ScrollView, View } from "react-native";
 import CardAllocation from "../components/CardAllocation";
 import Accordion from "../components/Accordion";
 import { getMonthName } from "../utils/utils";
-import NotificationButton from "../components/NotificationButton";
+import FilterButton from "../components/FilterButton";
 
-export default HomeScreen = ({ onNotificationPress }) => {
+export default HomeScreen = ({ onFilterBtnPress }) => {
   const [resources, setResources] = useState([]);
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const date = new Date();
@@ -27,6 +28,7 @@ export default HomeScreen = ({ onNotificationPress }) => {
       })
       .catch((error) => {
         console.log(error);
+        setError("Algo deu errado! Por favor, tente novamente.");
       });
 
     setIsLoading(false);
@@ -42,6 +44,8 @@ export default HomeScreen = ({ onNotificationPress }) => {
         <Text style={styles.titleText}>Recursos Alocados</Text>
         {isLoading ? (
           <Text>Carregando...</Text>
+        ) : error ? (
+          <Text>{error}</Text>
         ) : (
           Object.keys(resources).map((time, i) => (
             <Accordion key={i} time={time} date={formattedDate}>
@@ -59,8 +63,8 @@ export default HomeScreen = ({ onNotificationPress }) => {
           ))
         )}
       </ScrollView>
-      <View style={styles.notificationButton}>
-        <NotificationButton onPress={onNotificationPress} />
+      <View style={styles.filterButton}>
+        <FilterButton onPress={onFilterBtnPress} />
       </View>
     </View>
   );
@@ -77,7 +81,7 @@ const styles = StyleSheet.create({
     color: "#111827",
     margin: 10,
   },
-  notificationButton: {
+  filterButton: {
     position: "absolute",
     bottom: 30,
     right: 30,
