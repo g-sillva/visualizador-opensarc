@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import FilterBadge from "./FilterBadge";
+import { daysList } from "../utils/constants";
 
 export default DaysFilter = ({ onChange }) => {
   const [selectedValue, setSelectedValue] = useState([]);
-
-  const days = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
 
   const onChangeValues = (day) => {
     if (selectedValue.includes(day)) {
@@ -21,7 +20,7 @@ export default DaysFilter = ({ onChange }) => {
 
   return (
     <View style={styles.container}>
-      {days.map((day) => (
+      {daysList.map((day) => (
         <FilterBadge
           key={day}
           value={day}

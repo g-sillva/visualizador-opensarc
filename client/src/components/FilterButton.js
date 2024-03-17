@@ -5,7 +5,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 export default FilterButton = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Ionicons name="filter" size={25} color="#ffffff" />
+      <Ionicons name="funnel" size={25} color="#ffffff" />
     </TouchableOpacity>
   );
 };
