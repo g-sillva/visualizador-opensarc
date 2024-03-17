@@ -1,11 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { Controller, useForm } from "react-hook-form";
+import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import FilterBadge from "./FilterBadge";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { filterFormSchema } from "../utils/types";
+import DaysFilter from "./DaysFilter";
 
 export default FilterForm = () => {
-  const days = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      responsible: "",
+      day: [],
+      subject: "",
+      time: "",
+    },
+    resolver: zodResolver(filterFormSchema),
+  });
+
+  const onSubmit = (data) => {
+    Alert.alert("Filtrar", JSON.stringify(data));
+  };
 
   return (
     <View style={styles.container}>
@@ -13,39 +28,77 @@ export default FilterForm = () => {
         <Text style={styles.title}>Filtrar</Text>
       </View>
       <View style={styles.form}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}>Responsável</Text>
-          <View style={styles.inputField}>
-            <Ionicons name="person" size={20} color="#6B7280" />
-            <TextInput
-              placeholder="Nome do professor..."
-              style={styles.inputText}
-            />
-          </View>
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}>Dia</Text>
-          <View style={styles.inputField}>
-            {days.map((day) => (
-              <FilterBadge key={day} value={day} />
-            ))}
-          </View>
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}>Disciplina</Text>
-          <View style={styles.inputField}>
-            <Ionicons name="school" size={20} color="#6B7280" />
-            <TextInput placeholder="Disciplina..." style={styles.inputText} />
-          </View>
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}>Horário</Text>
-          <View style={styles.inputField}>
-            <Ionicons name="time" size={20} color="#6B7280" />
-            <TextInput placeholder="Ex.: JK" style={styles.inputText} />
-          </View>
-        </View>
-        <TouchableOpacity style={styles.addButton}>
+        <Controller
+          control={control}
+          name="responsible"
+          render={({ field: { onChange, value } }) => (
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Responsável</Text>
+              <View style={styles.inputField}>
+                <Ionicons name="person" size={20} color="#6B7280" />
+                <TextInput
+                  placeholder="Nome do professor..."
+                  style={styles.inputText}
+                  value={value}
+                  onChangeText={onChange}
+                />
+              </View>
+            </View>
+          )}
+        />
+        <Controller
+          control={control}
+          name="day"
+          render={({ field: { onChange } }) => {
+            return (
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>Dia</Text>
+                <DaysFilter onChange={onChange} />
+              </View>
+            );
+          }}
+        />
+        <Controller
+          control={control}
+          name="subject"
+          render={({ field: { onChange, value } }) => (
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Disciplina</Text>
+              <View style={styles.inputField}>
+                <Ionicons name="school" size={20} color="#6B7280" />
+                <TextInput
+                  placeholder="Disciplina..."
+                  style={styles.inputText}
+                  value={value}
+                  onChangeText={onChange}
+                />
+              </View>
+            </View>
+          )}
+        />
+        <Controller
+          control={control}
+          name="time"
+          render={({ field: { onChange, value } }) => (
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Horário</Text>
+              <View style={styles.inputField}>
+                <Ionicons name="time" size={20} color="#6B7280" />
+                <TextInput
+                  autoCapitalize="characters"
+                  placeholder="Ex.: JK,NP"
+                  style={styles.inputText}
+                  value={value}
+                  onChangeText={onChange}
+                />
+              </View>
+            </View>
+          )}
+        />
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={handleSubmit(onSubmit)}
+        >
           <Text style={styles.addButtonText}>FILTRAR</Text>
         </TouchableOpacity>
       </View>

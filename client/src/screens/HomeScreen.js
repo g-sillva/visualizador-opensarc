@@ -53,7 +53,7 @@ export default HomeScreen = ({ onFilterBtnPress }) => {
                 <CardAllocation
                   key={j}
                   responsible={resource.responsible}
-                  discipline={resource.discipline}
+                  subject={resource.subject}
                   resource={resource.resource}
                   time={resource.time}
                   type={resource.type}

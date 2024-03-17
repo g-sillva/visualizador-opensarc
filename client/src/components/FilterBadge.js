@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default FilterBadge = ({ value = "VAL", onPress }) => {
-  const [isActive, setIsActive] = useState(false);
+export default FilterBadge = ({ value = "VAL", onChange, selected }) => {
+  const [isActive, setIsActive] = useState(selected);
 
   const handlePress = () => {
     setIsActive(!isActive);
-    onPress && onPress(value);
+    onChange && onChange(value);
   };
 
   return (

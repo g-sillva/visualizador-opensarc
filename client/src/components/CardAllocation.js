@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const CardAllocation = ({ responsible, discipline, resource, time, type }) => {
+const CardAllocation = ({ responsible, subject, resource, time, type }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -18,7 +18,7 @@ const CardAllocation = ({ responsible, discipline, resource, time, type }) => {
         <View style={styles.contentHeader}>
           <Text style={styles.responsibleText}>{responsible}</Text>
         </View>
-        <Text style={styles.titleText}>{discipline}</Text>
+        <Text style={styles.titleText}>{subject}</Text>
         <Text style={styles.resourceText}>
           {time} - {resource}
         </Text>
