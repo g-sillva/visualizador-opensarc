@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import FilterBadge from "./FilterBadge";
 
 export default FilterForm = () => {
+  const days = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -23,11 +26,9 @@ export default FilterForm = () => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>Dia</Text>
           <View style={styles.inputField}>
-            <Ionicons name="calendar" size={20} color="#6B7280" />
-            <TextInput
-              placeholder="Dia da semana..."
-              style={styles.inputText}
-            />
+            {days.map((day) => (
+              <FilterBadge key={day} value={day} />
+            ))}
           </View>
         </View>
         <View style={styles.inputContainer}>
