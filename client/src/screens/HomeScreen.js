@@ -6,8 +6,10 @@ import Accordion from "../components/Accordion";
 import { getMonthName } from "../utils/utils";
 import FilterButton from "../components/FilterButton";
 
-export default HomeScreen = ({ onFilterBtnPress }) => {
+export default HomeScreen = ({ onFilterBtnPress, filters }) => {
   const [resources, setResources] = useState([]);
+  const [filteredResources, setFilteredResources] = useState([]);
+
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,6 +27,7 @@ export default HomeScreen = ({ onFilterBtnPress }) => {
       )
       .then((resp) => {
         setResources(resp.data.items[0]);
+        setFilteredResources(resp.data.items[0]);
       })
       .catch((error) => {
         console.log(error);
@@ -34,9 +37,33 @@ export default HomeScreen = ({ onFilterBtnPress }) => {
     setIsLoading(false);
   };
 
+  const filterResources = () => {
+    console.log(filteredResources.length);
+
+    Object.keys(resources).forEach((time) => {
+      if (filters.responsible) {
+        setFilteredResources((prev) =>
+          prev.filter((resource) =>
+            resource.responsible
+              .toLowerCase()
+              .includes(filters.responsible.toLowerCase())
+          )
+        );
+      }
+    });
+  };
+
   useEffect(() => {
     fetchResources();
   }, []);
+
+  useEffect(() => {
+    setFilteredResources(resources);
+  }, [resources]);
+
+  useEffect(() => {
+    filterResources();
+  }, [filters]);
 
   return (
     <View style={styles.container}>
@@ -47,9 +74,9 @@ export default HomeScreen = ({ onFilterBtnPress }) => {
         ) : error ? (
           <Text>{error}</Text>
         ) : (
-          Object.keys(resources).map((time, i) => (
+          Object.keys(filteredResources).map((time, i) => (
             <Accordion key={i} time={time} date={formattedDate}>
-              {resources[time].map((resource, j) => (
+              {filteredResources[time].map((resource, j) => (
                 <CardAllocation
                   key={j}
                   responsible={resource.responsible}

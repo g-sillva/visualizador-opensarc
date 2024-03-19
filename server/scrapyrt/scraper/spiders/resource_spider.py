@@ -19,7 +19,7 @@ class ResourceSpider(scrapy.Spider):
                     'time': time,
                     'timeCode': timeCode,
                     'resource': line.css('td:nth-child(1) span::text').get().strip(),
-                    'discipline': line.css('td:nth-child(2) span::text').get().strip(),
+                    'subject': line.css('td:nth-child(2) span::text').get().strip(),
                     'responsible': line.css('td:nth-child(3) span::text').get().strip(),
                     'type': self.format_type(line.css('td:nth-child(1) span::text').get().strip()),
                 }

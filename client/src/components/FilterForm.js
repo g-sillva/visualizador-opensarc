@@ -8,7 +8,7 @@ import { filterFormSchema } from "../utils/types";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DaysFilter from "./DaysFilter";
 
-export default FilterForm = () => {
+export default FilterForm = ({ onSubmit }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       responsible: "",
@@ -18,10 +18,6 @@ export default FilterForm = () => {
     },
     resolver: zodResolver(filterFormSchema),
   });
-
-  const onSubmit = (data) => {
-    Alert.alert("Filtrar", JSON.stringify(data));
-  };
 
   return (
     <View style={styles.container}>

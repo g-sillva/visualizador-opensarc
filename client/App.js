@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 import HomeScreen from "./src/screens/HomeScreen";
 import {
@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import FilterForm from "./src/components/FilterForm";
 
 export default function App() {
+  const [filter, setFilter] = useState({});
   const bottomSheetModalRef = useRef(null);
 
   const snapPoints = useMemo(() => ["65%", "65%"], []);
@@ -26,7 +27,10 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <GestureHandlerRootView style={styles.bottomSheetContainer}>
         <BottomSheetModalProvider>
-          <HomeScreen onFilterBtnPress={handleFilterBtnPress} />
+          <HomeScreen
+            onFilterBtnPress={handleFilterBtnPress}
+            filters={filter}
+          />
           <BottomSheetModal
             ref={bottomSheetModalRef}
             index={1}
@@ -34,7 +38,7 @@ export default function App() {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <FilterForm />
+              <FilterForm onSubmit={setFilter} />
             </BottomSheetView>
           </BottomSheetModal>
         </BottomSheetModalProvider>
