@@ -48,31 +48,27 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
   useEffect(() => {
     let filteredItems = {};
 
-    Object.keys(resources).forEach((resource) => {
+    Object.entries(resources).forEach(([resource, items]) => {
       if (filters.time) {
-        let shouldFilter = true;
-        const timesSplit = filters.time.toLowerCase().split(",");
-
-        timesSplit.forEach((time) => {
-          const first = timeMap[time[0]];
-          if (first === resource) shouldFilter = false;
-        });
-
-        if (shouldFilter) return;
+        const timeSplit = filters.time.toLowerCase().split(",");
+        const shouldFilter = timeSplit.some(
+          (time) => timeMap[time[0]] === resource
+        );
+        if (!shouldFilter) return;
       }
 
-      resources[resource].forEach((item) => {
-        if (
-          item.responsible &&
+      items.forEach((item) => {
+        const responsibleMatches =
+          !filters.responsible ||
           item.responsible
             .toLowerCase()
-            .includes(filters.responsible.toLowerCase()) &&
-          item.subject &&
-          item.subject.toLowerCase().includes(filters.subject.toLowerCase())
-        ) {
-          if (!filteredItems[resource]) {
-            filteredItems[resource] = [];
-          }
+            .includes(filters.responsible.toLowerCase());
+        const subjectMatches =
+          !filters.subject ||
+          item.subject.toLowerCase().includes(filters.subject.toLowerCase());
+
+        if (responsibleMatches && subjectMatches) {
+          filteredItems[resource] = filteredItems[resource] || [];
           filteredItems[resource].push(item);
         }
       });

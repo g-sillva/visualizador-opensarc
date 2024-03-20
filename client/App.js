@@ -13,13 +13,16 @@ export default function App() {
   const [filter, setFilter] = useState({});
   const bottomSheetModalRef = useRef(null);
 
-  const snapPoints = useMemo(() => ["65%", "65%"], []);
+  const snapPoints = useMemo(() => ["55%", "55%"], []);
 
   const handleFilterBtnPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  const handleSheetChanges = useCallback((index) => {}, []);
+  const handleApplyFilter = useCallback((filter) => {
+    setFilter(filter);
+    bottomSheetModalRef.current?.dismiss();
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,10 +36,9 @@ export default function App() {
             ref={bottomSheetModalRef}
             index={1}
             snapPoints={snapPoints}
-            onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <FilterForm onSubmit={setFilter} />
+              <FilterForm onSubmit={handleApplyFilter} />
             </BottomSheetView>
           </BottomSheetModal>
         </BottomSheetModalProvider>

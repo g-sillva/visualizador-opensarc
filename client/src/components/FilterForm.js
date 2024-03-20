@@ -6,13 +6,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { filterFormSchema } from "../utils/types";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DaysFilter from "./DaysFilter";
 
 export default FilterForm = ({ onSubmit }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       responsible: "",
-      day: [],
       subject: "",
       time: "",
     },
@@ -43,18 +41,6 @@ export default FilterForm = ({ onSubmit }) => {
                 </View>
               </View>
             )}
-          />
-          <Controller
-            control={control}
-            name="day"
-            render={({ field: { onChange } }) => {
-              return (
-                <View style={styles.inputContainer}>
-                  <Text style={styles.inputLabel}>Dia</Text>
-                  <DaysFilter onChange={onChange} />
-                </View>
-              );
-            }}
           />
           <Controller
             control={control}
