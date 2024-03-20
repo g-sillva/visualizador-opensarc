@@ -24,12 +24,18 @@ export default function App() {
     bottomSheetModalRef.current?.dismiss();
   });
 
+  const handleRefresh = useCallback(() => {
+    setFilter({});
+    bottomSheetModalRef.current?.dismiss();
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <GestureHandlerRootView style={styles.bottomSheetContainer}>
         <BottomSheetModalProvider>
           <HomeScreen
             onFilterBtnPress={handleFilterBtnPress}
+            onRefresh={handleRefresh}
             filters={filter}
           />
           <BottomSheetModal

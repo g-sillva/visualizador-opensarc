@@ -1,13 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, ScrollView, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  RefreshControl,
+  ActivityIndicator,
+} from "react-native";
 import CardAllocation from "../components/CardAllocation";
 import Accordion from "../components/Accordion";
 import FilterButton from "../components/FilterButton";
 import { monthsList, timeMap } from "../utils/constants";
 
-export default HomeScreen = ({ onFilterBtnPress, filters }) => {
+export default HomeScreen = ({ onFilterBtnPress, onRefresh, filters }) => {
   const [resources, setResources] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
   const [filteredResources, setFilteredResources] = useState([]);
 
   const [error, setError] = useState(null);
@@ -21,13 +29,10 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
     setIsLoading(true);
 
     await axios
-      .get(
-        process.env.EXPO_PUBLIC_SERVER_API_URL +
-          "/crawl.json?spider_name=resource_spider&url=https://sarc.pucrs.br/Default/"
-      )
+      .get(process.env.EXPO_PUBLIC_SERVER_API_URL + "/resources")
       .then((resp) => {
-        setResources(resp.data.items[0]);
-        setFilteredResources(resp.data.items[0]);
+        setResources(resp.data.value[0]);
+        setFilteredResources(resp.data.value[0]);
       })
       .catch((error) => {
         console.log(error);
@@ -35,6 +40,15 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
       });
 
     setIsLoading(false);
+  };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    fetchResources();
+
+    onRefresh && onRefresh();
+
+    setRefreshing(false);
   };
 
   useEffect(() => {
@@ -79,7 +93,12 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      {refreshing ? <ActivityIndicator /> : null}
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }
+      >
         <Text style={styles.titleText}>Recursos Alocados</Text>
         {isLoading ? (
           <Text>Carregando...</Text>
