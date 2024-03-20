@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, ScrollView, View } from "react-native";
 import CardAllocation from "../components/CardAllocation";
 import Accordion from "../components/Accordion";
-import { getMonthName } from "../utils/utils";
 import FilterButton from "../components/FilterButton";
+import { monthsList, timeMap } from "../utils/constants";
 
 export default HomeScreen = ({ onFilterBtnPress, filters }) => {
   const [resources, setResources] = useState([]);
@@ -14,7 +14,7 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const date = new Date();
-  const monthName = getMonthName(date.getMonth());
+  const monthName = monthsList[date.getMonth()];
   const formattedDate = `${date.getDate()} ${monthName} ${date.getFullYear()}`;
 
   const fetchResources = async () => {
@@ -47,12 +47,27 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
 
   useEffect(() => {
     let filteredItems = {};
+
     Object.keys(resources).forEach((resource) => {
+      if (filters.time) {
+        let shouldFilter = true;
+        const timesSplit = filters.time.toLowerCase().split(",");
+
+        timesSplit.forEach((time) => {
+          const first = timeMap[time[0]];
+          if (first === resource) shouldFilter = false;
+        });
+
+        if (shouldFilter) return;
+      }
+
       resources[resource].forEach((item) => {
         if (
+          item.responsible &&
           item.responsible
             .toLowerCase()
             .includes(filters.responsible.toLowerCase()) &&
+          item.subject &&
           item.subject.toLowerCase().includes(filters.subject.toLowerCase())
         ) {
           if (!filteredItems[resource]) {
