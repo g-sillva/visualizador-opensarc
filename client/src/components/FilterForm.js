@@ -7,12 +7,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { filterFormSchema } from "../utils/types";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default FilterForm = ({ onSubmit }) => {
+export default FilterForm = ({ values, onSubmit }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      responsible: "",
-      subject: "",
-      time: "",
+      responsible: values.responsible || "",
+      subject: values.subject || "",
+      time: values.time || "",
     },
     resolver: zodResolver(filterFormSchema),
   });
@@ -80,10 +80,10 @@ export default FilterForm = ({ onSubmit }) => {
             )}
           />
           <TouchableOpacity
-            style={styles.addButton}
+            style={styles.filterButton}
             onPress={handleSubmit(onSubmit)}
           >
-            <Text style={styles.addButtonText}>FILTRAR</Text>
+            <Text style={styles.filterButtonText}>FILTRAR</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  addButton: {
+  filterButton: {
     backgroundColor: "#FA521D",
     padding: 10,
     borderRadius: 50,
     width: "50%",
     alignSelf: "center",
   },
-  addButtonText: {
+  filterButtonText: {
     color: "#fff",
     textAlign: "center",
     fontWeight: "bold",

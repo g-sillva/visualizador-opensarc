@@ -38,7 +38,7 @@ export default function App() {
             snapPoints={snapPoints}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <FilterForm onSubmit={handleApplyFilter} />
+              <FilterForm values={filter} onSubmit={handleApplyFilter} />
             </BottomSheetView>
           </BottomSheetModal>
         </BottomSheetModalProvider>
