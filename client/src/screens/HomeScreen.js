@@ -37,22 +37,6 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
     setIsLoading(false);
   };
 
-  const filterResources = () => {
-    console.log(filteredResources.length);
-
-    Object.keys(resources).forEach((time) => {
-      if (filters.responsible) {
-        setFilteredResources((prev) =>
-          prev.filter((resource) =>
-            resource.responsible
-              .toLowerCase()
-              .includes(filters.responsible.toLowerCase())
-          )
-        );
-      }
-    });
-  };
-
   useEffect(() => {
     fetchResources();
   }, []);
@@ -62,7 +46,24 @@ export default HomeScreen = ({ onFilterBtnPress, filters }) => {
   }, [resources]);
 
   useEffect(() => {
-    filterResources();
+    let filteredItems = {};
+    Object.keys(resources).forEach((resource) => {
+      resources[resource].forEach((item) => {
+        if (
+          item.responsible
+            .toLowerCase()
+            .includes(filters.responsible.toLowerCase()) &&
+          item.subject.toLowerCase().includes(filters.subject.toLowerCase())
+        ) {
+          if (!filteredItems[resource]) {
+            filteredItems[resource] = [];
+          }
+          filteredItems[resource].push(item);
+        }
+      });
+    });
+
+    setFilteredResources(filteredItems);
   }, [filters]);
 
   return (
