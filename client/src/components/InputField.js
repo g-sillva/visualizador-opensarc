@@ -15,6 +15,7 @@ export default InputField = ({
   placeholder,
   icon,
   clearIcon,
+  disabled = false,
 }) => {
   return (
     <View style={styles.container}>
@@ -26,6 +27,8 @@ export default InputField = ({
             placeholder={placeholder}
             value={value}
             onChangeText={onChange}
+            readOnly={disabled}
+            style={disabled ? { color: "#6B7280" } : { color: "#313135" }}
           />
         </View>
         {clearIcon && (
