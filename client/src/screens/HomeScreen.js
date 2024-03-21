@@ -122,7 +122,7 @@ export default HomeScreen = ({ onFilterBtnPress, onRefresh, filters }) => {
         )}
       </ScrollView>
       <View style={styles.filterButton}>
-        <FilterButton onPress={onFilterBtnPress} />
+        <FilterButton onPress={onFilterBtnPress} filters={filters} />
       </View>
     </View>
   );
