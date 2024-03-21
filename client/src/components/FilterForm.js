@@ -30,14 +30,19 @@ export default FilterForm = ({ values, onSubmit }) => {
             render={({ field: { onChange, value } }) => (
               <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Responsável</Text>
-                <View style={styles.inputField}>
-                  <Ionicons name="person" size={20} color="#6B7280" />
-                  <TextInput
-                    placeholder="Nome do professor..."
-                    style={styles.inputText}
-                    value={value}
-                    onChangeText={onChange}
-                  />
+                <View style={styles.inputFieldWrapper}>
+                  <View style={styles.inputField}>
+                    <Ionicons name="person" size={20} color="#6B7280" />
+                    <TextInput
+                      placeholder="Nome do professor..."
+                      style={styles.inputText}
+                      value={value}
+                      onChangeText={onChange}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => onChange("")}>
+                    <Ionicons name="close-outline" size={20} color="#6B7280" />
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -48,14 +53,19 @@ export default FilterForm = ({ values, onSubmit }) => {
             render={({ field: { onChange, value } }) => (
               <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Disciplina</Text>
-                <View style={styles.inputField}>
-                  <Ionicons name="school" size={20} color="#6B7280" />
-                  <TextInput
-                    placeholder="Disciplina..."
-                    style={styles.inputText}
-                    value={value}
-                    onChangeText={onChange}
-                  />
+                <View style={styles.inputFieldWrapper}>
+                  <View style={styles.inputField}>
+                    <Ionicons name="school" size={20} color="#6B7280" />
+                    <TextInput
+                      placeholder="Disciplina..."
+                      style={styles.inputText}
+                      value={value}
+                      onChangeText={onChange}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => onChange("")}>
+                    <Ionicons name="close-outline" size={20} color="#6B7280" />
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -66,15 +76,20 @@ export default FilterForm = ({ values, onSubmit }) => {
             render={({ field: { onChange, value } }) => (
               <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Horário</Text>
-                <View style={styles.inputField}>
-                  <Ionicons name="time" size={20} color="#6B7280" />
-                  <TextInput
-                    autoCapitalize="characters"
-                    placeholder="Ex.: JK,NP"
-                    style={styles.inputText}
-                    value={value}
-                    onChangeText={onChange}
-                  />
+                <View style={styles.inputFieldWrapper}>
+                  <View style={styles.inputField}>
+                    <Ionicons name="time" size={20} color="#6B7280" />
+                    <TextInput
+                      autoCapitalize="characters"
+                      placeholder="Ex.: JK,NP"
+                      style={styles.inputText}
+                      value={value}
+                      onChangeText={onChange}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => onChange("")}>
+                    <Ionicons name="close-outline" size={20} color="#6B7280" />
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -120,15 +135,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#6B7280",
   },
-  inputField: {
+  inputFieldWrapper: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     gap: 10,
     padding: 10,
     borderBottomWidth: 1,
     borderColor: "#D1D5DB",
     borderRadius: 5,
+  },
+  inputField: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
   },
   inputText: {
     fontSize: 16,
