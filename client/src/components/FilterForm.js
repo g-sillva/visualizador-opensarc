@@ -1,11 +1,11 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { StyleSheet, Text, View, TextInput } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { filterFormSchema } from "../utils/types";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import InputField from "./InputField";
 
 export default FilterForm = ({ values, onSubmit }) => {
   const { control, handleSubmit } = useForm({
@@ -28,70 +28,43 @@ export default FilterForm = ({ values, onSubmit }) => {
             control={control}
             name="responsible"
             render={({ field: { onChange, value } }) => (
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Responsável</Text>
-                <View style={styles.inputFieldWrapper}>
-                  <View style={styles.inputField}>
-                    <Ionicons name="person" size={20} color="#6B7280" />
-                    <TextInput
-                      placeholder="Nome do professor..."
-                      style={styles.inputText}
-                      value={value}
-                      onChangeText={onChange}
-                    />
-                  </View>
-                  <TouchableOpacity onPress={() => onChange("")}>
-                    <Ionicons name="close-outline" size={20} color="#6B7280" />
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <InputField
+                label="Responsável"
+                value={value}
+                onChange={onChange}
+                placeholder="Nome do professor..."
+                icon="person"
+                clearIcon
+              />
             )}
           />
           <Controller
             control={control}
             name="subject"
             render={({ field: { onChange, value } }) => (
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Disciplina</Text>
-                <View style={styles.inputFieldWrapper}>
-                  <View style={styles.inputField}>
-                    <Ionicons name="school" size={20} color="#6B7280" />
-                    <TextInput
-                      placeholder="Disciplina..."
-                      style={styles.inputText}
-                      value={value}
-                      onChangeText={onChange}
-                    />
-                  </View>
-                  <TouchableOpacity onPress={() => onChange("")}>
-                    <Ionicons name="close-outline" size={20} color="#6B7280" />
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <InputField
+                label="Disciplina"
+                value={value}
+                onChange={onChange}
+                placeholder="Disciplina..."
+                icon="school"
+                clearIcon
+              />
             )}
           />
           <Controller
             control={control}
             name="time"
             render={({ field: { onChange, value } }) => (
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Horário</Text>
-                <View style={styles.inputFieldWrapper}>
-                  <View style={styles.inputField}>
-                    <Ionicons name="time" size={20} color="#6B7280" />
-                    <TextInput
-                      autoCapitalize="characters"
-                      placeholder="Ex.: JK,NP"
-                      style={styles.inputText}
-                      value={value}
-                      onChangeText={onChange}
-                    />
-                  </View>
-                  <TouchableOpacity onPress={() => onChange("")}>
-                    <Ionicons name="close-outline" size={20} color="#6B7280" />
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <InputField
+                label="Horário"
+                value={value}
+                onChange={onChange}
+                placeholder="Ex.: JK,NP"
+                icon="time"
+                autoCapitalize="characters"
+                clearIcon
+              />
             )}
           />
           <TouchableOpacity
@@ -126,35 +99,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     display: "flex",
     gap: 30,
-  },
-  inputContainer: {
-    display: "flex",
-    gap: 10,
-  },
-  inputLabel: {
-    fontSize: 14,
-    color: "#6B7280",
-  },
-  inputFieldWrapper: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 10,
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: "#D1D5DB",
-    borderRadius: 5,
-  },
-  inputField: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  inputText: {
-    fontSize: 16,
-    fontWeight: "bold",
   },
   filterButton: {
     backgroundColor: "#FA521D",

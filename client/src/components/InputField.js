@@ -15,6 +15,7 @@ export default InputField = ({
   placeholder,
   icon,
   clearIcon,
+  autoCapitalize = "none",
   disabled = false,
 }) => {
   return (
@@ -28,10 +29,11 @@ export default InputField = ({
             value={value}
             onChangeText={onChange}
             readOnly={disabled}
+            autoCapitalize={autoCapitalize}
             style={disabled ? { color: "#6B7280" } : { color: "#313135" }}
           />
         </View>
-        {clearIcon && (
+        {clearIcon && value != "" && (
           <TouchableOpacity onPress={() => onChange("")}>
             <Ionicons name="close-outline" size={20} color="#6B7280" />
           </TouchableOpacity>
@@ -43,8 +45,6 @@ export default InputField = ({
 
 const styles = StyleSheet.create({
   container: {
-    margin: 20,
-    paddingTop: 100,
     display: "flex",
     flexDirection: "column",
     gap: 10,

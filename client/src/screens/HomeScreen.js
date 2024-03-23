@@ -17,7 +17,6 @@ export default HomeScreen = ({ onFilterBtnPress, onRefresh, filters }) => {
   const [resources, setResources] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [filteredResources, setFilteredResources] = useState([]);
-
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,6 +32,7 @@ export default HomeScreen = ({ onFilterBtnPress, onRefresh, filters }) => {
       .then((resp) => {
         setResources(resp.data.value[0]);
         setFilteredResources(resp.data.value[0]);
+        setError(null);
       })
       .catch((error) => {
         console.log(error);
@@ -108,14 +108,15 @@ export default HomeScreen = ({ onFilterBtnPress, onRefresh, filters }) => {
           Object.keys(filteredResources).map((time, i) => (
             <Accordion key={i} time={time} date={formattedDate}>
               {filteredResources[time].map((resource, j) => (
-                <CardAllocation
-                  key={j}
-                  responsible={resource.responsible}
-                  subject={resource.subject}
-                  resource={resource.resource}
-                  time={resource.time}
-                  type={resource.type}
-                />
+                <View key={j}>
+                  <CardAllocation
+                    responsible={resource.responsible}
+                    subject={resource.subject}
+                    resource={resource.resource}
+                    time={resource.time}
+                    type={resource.type}
+                  />
+                </View>
               ))}
             </Accordion>
           ))

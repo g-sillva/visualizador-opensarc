@@ -2,9 +2,16 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const CardAllocation = ({ responsible, subject, resource, time, type }) => {
+const CardAllocation = ({
+  onPress,
+  responsible,
+  subject,
+  resource,
+  time,
+  type,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onPress={onPress}>
       <View>
         {type === "laboratory" ? (
           <Ionicons name="laptop-outline" size={25} color="#6B7280" />
