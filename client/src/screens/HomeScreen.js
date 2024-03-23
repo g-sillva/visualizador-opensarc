@@ -101,9 +101,13 @@ export default HomeScreen = ({ onFilterBtnPress, onRefresh, filters }) => {
       >
         <Text style={styles.titleText}>Recursos Alocados</Text>
         {isLoading ? (
-          <Text>Carregando...</Text>
+          <Text style={styles.infoText}>Carregando os recursos... 🚀</Text>
         ) : error ? (
-          <Text>{error}</Text>
+          <View>
+            <Text style={styles.infoText}>{error}</Text>
+          </View>
+        ) : Object.keys(filteredResources).length === 0 ? (
+          <Text style={styles.infoText}>Nenhum recurso foi encontrado 😕</Text>
         ) : (
           Object.keys(filteredResources).map((time, i) => (
             <Accordion key={i} time={time} date={formattedDate}>
@@ -122,9 +126,11 @@ export default HomeScreen = ({ onFilterBtnPress, onRefresh, filters }) => {
           ))
         )}
       </ScrollView>
-      <View style={styles.filterButton}>
-        <FilterButton onPress={onFilterBtnPress} filters={filters} />
-      </View>
+      {!isLoading && !error && (
+        <View style={styles.filterButton}>
+          <FilterButton onPress={onFilterBtnPress} filters={filters} />
+        </View>
+      )}
     </View>
   );
 };
@@ -138,11 +144,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "#111827",
+    textAlign: "center",
     margin: 10,
   },
   filterButton: {
     position: "absolute",
     bottom: 30,
     right: 30,
+  },
+  infoText: {
+    marginTop: 10,
+    marginLeft: 10,
+    fontSize: 14,
   },
 });
