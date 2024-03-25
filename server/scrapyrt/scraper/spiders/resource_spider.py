@@ -32,7 +32,7 @@ class ResourceSpider(scrapy.Spider):
         yield aggregated_data
 
     def format_type(self, type):
-        lab_types = ['lab', 'lad']
+        lab_types = ['lab', 'lad', 'lapro']
         if any(x in type.lower() for x in lab_types):
             return 'laboratory'
         elif 'audit' in type.lower():
