@@ -6,10 +6,11 @@ import { Item } from "../_models/Item";
 import Card from "../_components/card/Card";
 import { convertTimeCode } from "../_utils/converter";
 import InputText from "../_components/input-text/InputText";
+import SelectOne from "../_components/select-one/SelectOne";
 
 export default function Home() {
   const [data, setData] = useState<any>();
-  const [filters, setFilters] = useState({ general: "" });
+  const [filters, setFilters] = useState({ general: "", subject: "Todas" });
   const [filteredData, setFilteredData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
@@ -32,6 +33,41 @@ export default function Home() {
     }, {});
 
     setFilteredData(filteredData);
+  };
+
+  const handleSubjectFilter = (value: string) => {
+    setFilters({ ...filters, subject: value });
+
+    if (value === "Todas") return setFilteredData(data);
+
+    const filteredData = Object.keys(data).reduce((acc: any, key) => {
+      const items = data[key] as Item[];
+      const filteredItems = items.filter((item) => {
+        return item.subject.toLowerCase().includes(value.toLowerCase());
+      });
+
+      if (filteredItems.length) {
+        acc[key] = filteredItems;
+      }
+
+      return acc;
+    }, {});
+
+    setFilteredData(filteredData);
+  };
+
+  const getSubjectOptions = () => {
+    const subjects = Object.keys(data).reduce((acc: string[], key) => {
+      const items = data[key] as Item[];
+      items.forEach((item) => {
+        if (!acc.includes(item.subject)) {
+          acc.push(item.subject);
+        }
+      });
+
+      return acc;
+    }, []);
+    return ["Todas", ...subjects];
   };
 
   useEffect(() => {
@@ -64,6 +100,12 @@ export default function Home() {
       ) : (
         <>
           <div className={styles.filtersWrapper}>
+            <SelectOne
+              label="Disciplina"
+              selectedOption={filters.subject}
+              options={getSubjectOptions()}
+              onSelect={handleSubjectFilter}
+            />
             <InputText
               placeholder="Buscar..."
               label="Filtrar"

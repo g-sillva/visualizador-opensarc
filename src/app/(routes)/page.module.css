@@ -42,3 +42,9 @@
   gap: 30px;
   flex-wrap: wrap;
 }
+
+.filtersWrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
