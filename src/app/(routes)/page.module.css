@@ -1,4 +1,44 @@
 .main {
-    margin: 0 auto;
-    max-width: 1080px;
+  margin: 5rem auto;
+  max-width: 1210px;
+}
+
+.timeHeader {
+  color: var(--text-white-color);
+  display: flex;
+  gap: 30px;
+  margin: 3rem 0 1.5rem 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeHeader > hr {
+  width: 100%;
+  border: 1px solid var(--text-gray-color);
+}
+
+.timeHeader > .text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 300px;
+}
+
+.timeHeader > .text > h1 {
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.timeHeader > .text > p {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-gray-color);
+}
+
+.cardsContainer {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
 }

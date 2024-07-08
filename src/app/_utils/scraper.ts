@@ -27,7 +27,7 @@ export const scrapeData = async (page: any) => {
           .querySelector("td:nth-child(4) span")
           .innerText.trim();
 
-        let type = resource;
+        let type = resource.toLowerCase();
         if (labTypes.some((labType) => type.includes(labType))) {
           type = "laboratory";
         } else if (type.includes("audit")) {

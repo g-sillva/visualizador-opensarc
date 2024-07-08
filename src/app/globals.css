@@ -1,13 +1,10 @@
 :root {
-  --dark-color: #232429;
-  --dark-gray-color: #323741;
-  --white-color: #fff;
-  --light-green-color: #52B57D;
-  --green-color: #195040;
-  --light-red-color: #f35858;
-  --red-color: #501919;
-  --light-orange-color: #f3a958;
-  --orange-color: #503019;
+  --background-color: #232429;
+  --card-background-color: #ffffff;
+  --text-white-color: #ffffff;
+  --text-black-color: #000000;
+  --text-gray-color: #666666;
+  --text-light-gray-color: #dedede;
 }
 
 * {
@@ -17,6 +14,5 @@
 }
 
 body {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--background-color);
 }
