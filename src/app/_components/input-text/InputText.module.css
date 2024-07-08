@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.container > label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray-color);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputWrapper > span {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-gray-color);
+  font-size: 20px;
+}
+
+.inputWrapper > input {
+  background: var(--foreground-color);
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  outline: none;
+  border-radius: 5px;
+  color: var(--text-white-color);
+}
+
+.inputWrapper > .inputWithIcon {
+  padding: 10px 20px 10px 40px;
+}
+
+.inputWrapper > input::placeholder {
+  color: var(--text-gray-color);
+}
+
+.inputWrapper > input:focus, .inputWrapper > input:active {
+  border-color: var(--text-gray-color);
+}
