@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  basePath: "/visualizador-opensarc",
-  images: {
-    loader: "akamai",
-    path: "",
-  },
-};
+const nextConfig = {};
 
 export default nextConfig;
