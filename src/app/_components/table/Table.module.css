@@ -1,0 +1,21 @@
+.container {
+  margin: 2rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  gap: 20px;
+  letter-spacing: 1px;
+}
+
+.header > h2 {
+  font-size: 32px;
+}
+
+.header > p {
+  font-size: 14px;
+  font-weight: 300;
+  opacity: 0.5;
+}

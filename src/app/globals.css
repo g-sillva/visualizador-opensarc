@@ -1,0 +1,22 @@
+:root {
+  --dark-color: #232429;
+  --dark-gray-color: #323741;
+  --white-color: #fff;
+  --light-green-color: #52B57D;
+  --green-color: #195040;
+  --light-red-color: #f35858;
+  --red-color: #501919;
+  --light-orange-color: #f3a958;
+  --orange-color: #503019;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
