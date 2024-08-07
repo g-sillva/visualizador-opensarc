@@ -122,7 +122,7 @@ export default function Home() {
 
     const fetchData = cache(async () => {
       try {
-        const response = await fetch("/visualizador-opensarc/api/getData");
+        const response = await fetch("/api/getData");
         const data = await response.json();
         return data;
       } catch (error: any) {

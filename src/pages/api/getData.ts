@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
 
 type ResponseData = {
   message: string;
@@ -9,9 +9,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: require("puppeteer").executablePath(),
+    args: ["--no-sandbox"],
+  });
 
+  const page = await browser.newPage();
   await page.goto("https://sarc.pucrs.br/Default/");
 
   const result = await scrapeData(page);
