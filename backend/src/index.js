@@ -1,5 +1,9 @@
 const express = require("express");
-const puppeteer = require("puppeteer");
+const puppeteer =
+  process.env.NODE_ENV === "production"
+    ? require("puppeteer-core")
+    : require("puppeteer");
+const chromium = require("@sparticuz/chromium");
 const app = express();
 
 require("dotenv").config();
@@ -67,7 +71,28 @@ app.get("/health", (req, res) => {
 
 app.get("/api/v1/data", async (req, res) => {
   try {
-    const browser = await puppeteer.launch();
+    let browser;
+    if (process.env.NODE_ENV === "production") {
+      browser = await puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: "new",
+        ignoreHTTPSErrors: true,
+      });
+    } else {
+      browser = await puppeteer.launch({
+        args: [
+          "--disable-dev-shm-usage",
+          "--disable-gpu",
+          "--disable-setuid-sandbox",
+          "--headless",
+          "--no-sandbox",
+          "--single-process",
+        ],
+        ignoreHTTPSErrors: true,
+      });
+    }
 
     const page = await browser.newPage();
     await page.goto(process.env.URL_SARC);
