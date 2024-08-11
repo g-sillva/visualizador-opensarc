@@ -193,9 +193,9 @@ export default function Home() {
         <p>Visualização melhorada dos recursos alocados no OpenSarc.</p>
       </div>
       {isLoading ? (
-        <div>Carregando...</div>
+        <div className={styles.message}>Carregando...</div>
       ) : error ? (
-        <div>{error}</div>
+        <div className={styles.message}>{error}</div>
       ) : (
         <>
           <div className={styles.filtersWrapper}>
@@ -237,7 +237,7 @@ export default function Home() {
             />
           </div>
           {Object.keys(filteredData).length === 0 ? (
-            <div>Nenhum resultado encontrado</div>
+            <div className={styles.message}>Nenhum resultado encontrado :(</div>
           ) : (
             Object.keys(filteredData).map((key) => {
               const items = filteredData[key] as Item[];
